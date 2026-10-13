@@ -9,6 +9,7 @@ export default function Photo({
   position,
   preload,
   eager,
+  contain,
 }: {
   slug: PhotoSlug;
   sizes?: string;
@@ -16,6 +17,7 @@ export default function Photo({
   position?: string;
   preload?: boolean;
   eager?: boolean; // skip lazy loading, for images that must always show (cards, panels)
+  contain?: boolean; // show the whole photo instead of cropping to fill
 }) {
   const p = photo(slug);
   return (
@@ -26,7 +28,7 @@ export default function Photo({
       sizes={sizes}
       preload={preload}
       loading={eager ? "eager" : undefined}
-      className={`object-cover ${className}`}
+      className={`${contain ? "object-contain" : "object-cover"} ${className}`}
       style={position ? { objectPosition: position } : undefined}
     />
   );

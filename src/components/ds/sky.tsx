@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type ButtonHTMLAttributes, type ReactNode } from "react";
+import Link from "next/link";
 import AircraftPhoto from "@/components/AircraftPhoto";
 import { fmt, type Aircraft } from "@/lib/aircraft";
 import { forceState, type ControlState } from "@/lib/states";
@@ -197,7 +198,7 @@ export function SkSegment({
       aria-selected={state === "selected" || !!selected}
       {...forced(state)}
       {...rest}
-      className={`h-9 rounded-full px-5 text-sm text-[var(--sk-muted)] transition-[background-color,box-shadow,color] hov:text-[var(--sk-text)] prs:bg-[#dde6f0] sel:bg-white sel:font-semibold sel:text-[var(--sk-text)] sel:shadow-[0_1px_3px_rgba(24,33,44,0.12)] dis:cursor-not-allowed dis:text-[#a3afbc] ${ring}`}
+      className={`h-9 whitespace-nowrap rounded-full px-5 text-sm text-[var(--sk-muted)] transition-[background-color,box-shadow,color] hov:text-[var(--sk-text)] prs:bg-[#dde6f0] sel:bg-white sel:font-semibold sel:text-[var(--sk-text)] sel:shadow-[0_1px_3px_rgba(24,33,44,0.12)] dis:cursor-not-allowed dis:text-[#a3afbc] ${ring}`}
     >
       {children}
     </button>
@@ -278,6 +279,47 @@ export function SkBadge({ tone = "neutral", children }: { tone?: keyof typeof ba
   return <span className={`inline-flex h-6 items-center rounded-full px-2.5 text-xs font-semibold ${badgeTone[tone]}`}>{children}</span>;
 }
 
+// Shared inside of the aircraft card, used by the clickable design-system card and the site's profile links.
+function CardBody({ a, tagline, cta }: { a: Aircraft; tagline?: string; cta: string }) {
+  return (
+    <>
+      <span className="relative block aspect-[3/2] overflow-hidden bg-[var(--sk-mist)] text-[var(--sk-control)]">
+        <AircraftPhoto a={a} sizes="(min-width: 768px) 50vw, 100vw" className="transition-transform duration-700 group-hover:scale-[1.03]" />
+      </span>
+      <span className="flex flex-1 flex-col gap-5 p-6 sm:p-7">
+        <span>
+          <span className="block text-xs font-semibold uppercase tracking-[0.14em] text-[var(--sk-muted)]">
+            {a.manufacturer} · {a.body} · {a.engines} engines
+          </span>
+          <span className="mt-1.5 block text-3xl font-light tracking-tight text-[var(--sk-text)]">{a.name}</span>
+          {tagline && <span className="mt-1.5 block text-sm leading-relaxed text-[var(--sk-muted)]">{tagline}</span>}
+        </span>
+        <span className="grid grid-cols-2 gap-x-4 gap-y-3 border-t border-[var(--sk-border)] pt-4 sm:grid-cols-4">
+          {[
+            ["Range", `${fmt(a.rangeKm)} km`],
+            ["Seats", `${a.seats}`],
+            ["Length", `${a.lengthM} m`],
+            ["In service", `${a.firstService}`],
+          ].map(([k, v]) => (
+            <span key={k}>
+              <span className="block text-xs text-[var(--sk-muted)]">{k}</span>
+              <span className="text-sm font-semibold tabular-nums text-[var(--sk-text)]">{v}</span>
+            </span>
+          ))}
+        </span>
+        <span className="mt-auto inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--sk-muted)] transition-colors group-hover:text-[var(--sk-accent)] group-focus-visible:text-[var(--sk-accent)] group-aria-pressed:text-[var(--sk-accent)] group-data-[state=hover]:text-[var(--sk-accent)]">
+          {cta}
+          <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
+            →
+          </span>
+        </span>
+      </span>
+    </>
+  );
+}
+
+const cardShell = `group flex h-full w-full flex-col overflow-hidden rounded-[22px] bg-white text-left ring-1 ring-[var(--sk-border)] transition-[box-shadow,transform] duration-200 hov:-translate-y-1 hov:shadow-[0_18px_40px_-18px_rgba(24,33,44,0.28)] prs:translate-y-0 prs:shadow-none sel:ring-2 sel:ring-[var(--sk-accent)] dis:cursor-not-allowed dis:opacity-50 ${ring}`;
+
 export function SkCard({
   a,
   state,
@@ -296,44 +338,19 @@ export function SkCard({
       aria-haspopup="dialog"
       {...(state === "selected" || selected ? { "aria-pressed": true } : {})}
       {...forced(state)}
-      className={`group flex w-full flex-col overflow-hidden rounded-[22px] bg-white text-left ring-1 ring-[var(--sk-border)] transition-[box-shadow,transform] duration-200 hov:-translate-y-1 hov:shadow-[0_18px_40px_-18px_rgba(24,33,44,0.28)] prs:translate-y-0 prs:shadow-none sel:ring-2 sel:ring-[var(--sk-accent)] dis:cursor-not-allowed dis:opacity-50 ${ring}`}
+      className={cardShell}
     >
-      <span className="relative block aspect-[16/10] overflow-hidden bg-[var(--sk-mist)] text-[var(--sk-control)]">
-        <AircraftPhoto
-          a={a}
-          sizes="(min-width: 768px) 50vw, 100vw"
-          className="transition-transform duration-700 group-hover:scale-[1.03]"
-        />
-      </span>
-      <span className="flex flex-col gap-5 p-6">
-        <span className="flex items-start justify-between gap-4">
-          <span>
-            <span className="block text-xs font-semibold uppercase tracking-[0.14em] text-[var(--sk-muted)]">
-              {a.manufacturer} · {a.body}
-            </span>
-            <span className="mt-1 block text-2xl font-light tracking-tight text-[var(--sk-text)]">{a.name}</span>
-          </span>
-          <span className="mt-1 inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-[var(--sk-muted)] transition-colors group-hover:text-[var(--sk-accent)] group-aria-pressed:text-[var(--sk-accent)]">
-            Details
-            <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
-              →
-            </span>
-          </span>
-        </span>
-        <span className="grid grid-cols-3 border-t border-[var(--sk-border)] pt-4 text-xs">
-          {[
-            ["Range", `${fmt(a.rangeKm)} km`],
-            ["Seats", `${a.seats}`],
-            ["Wingspan", `${a.spanM} m`],
-          ].map(([k, v]) => (
-            <span key={k}>
-              <span className="block text-[var(--sk-muted)]">{k}</span>
-              <span className="text-sm font-semibold text-[var(--sk-text)]">{v}</span>
-            </span>
-          ))}
-        </span>
-      </span>
+      <CardBody a={a} cta="Details" />
     </button>
+  );
+}
+
+// The site's version: a link to the aircraft's profile page.
+export function SkProfileCard({ a, tagline, href }: { a: Aircraft; tagline: string; href: string }) {
+  return (
+    <Link href={href} className={cardShell}>
+      <CardBody a={a} tagline={tagline} cta="View profile" />
+    </Link>
   );
 }
 
@@ -452,85 +469,5 @@ export function SkModal({ a, open, onClose }: { a: Aircraft; open: boolean; onCl
     <SkDialog open={open} onClose={onClose} labelledBy="sk-modal-title" className="max-w-lg">
       <SkSheet a={a} onClose={onClose} headingId="sk-modal-title" />
     </SkDialog>
-  );
-}
-
-// Full aircraft profile for the detail panel on the Aircraft Explorer site.
-export function SkDetail({
-  a,
-  onClose,
-  onPrev,
-  onNext,
-  position,
-  headingId,
-}: {
-  a: Aircraft;
-  onClose: () => void;
-  onPrev: () => void;
-  onNext: () => void;
-  position: string;
-  headingId: string;
-}) {
-  const specs: [string, string][] = [
-    ["Range", `${fmt(a.rangeKm)} km`],
-    ["Typical seats", `${a.seats}`],
-    ["Length", `${a.lengthM} m`],
-    ["Wingspan", `${a.spanM} m`],
-    ["Max takeoff weight", `${a.mtowT} t`],
-    ["In service since", `${a.firstService}`],
-  ];
-  return (
-    <article>
-      <div className="relative aspect-[16/9] bg-[var(--sk-mist)] text-[var(--sk-control)]">
-        <AircraftPhoto a={a} sizes="(min-width: 768px) 720px, 100vw" />
-        <button
-          type="button"
-          onClick={onClose}
-          aria-label="Close details"
-          className={`absolute right-4 top-4 grid size-10 place-items-center rounded-full bg-white/90 text-[var(--sk-text)] shadow-[0_2px_8px_rgba(24,33,44,0.15)] backdrop-blur transition hov:bg-white prs:scale-95 ${ring}`}
-        >
-          <svg viewBox="0 0 12 12" className="size-3" aria-hidden>
-            <path d="M1 1l10 10M11 1L1 11" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-          </svg>
-        </button>
-      </div>
-      <div className="flex flex-col gap-6 p-6 sm:p-10">
-        <div className="flex flex-col gap-3">
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--sk-muted)]">
-            {a.manufacturer} · {a.body} · {a.engines} engines
-          </p>
-          <h2 id={headingId} className="text-4xl font-extralight tracking-[-0.02em] sm:text-5xl">
-            {a.manufacturer} {a.name}
-          </h2>
-          <div className="flex flex-wrap gap-2">
-            <SkBadge tone={a.inProduction ? "success" : "warning"}>{a.inProduction ? "In production" : "Production ended"}</SkBadge>
-          </div>
-        </div>
-        <p className="max-w-xl text-lg leading-relaxed text-[var(--sk-muted)]">{a.summary}</p>
-        <dl className="grid grid-cols-2 gap-x-6 gap-y-5 rounded-[20px] bg-[var(--sk-mist)] p-5 sm:grid-cols-3 sm:p-6">
-          {specs.map(([k, v]) => (
-            <div key={k}>
-              <dt className="text-xs text-[var(--sk-muted)]">{k}</dt>
-              <dd className="mt-0.5 text-xl font-light tabular-nums">{v}</dd>
-            </div>
-          ))}
-          <div className="col-span-2 sm:col-span-3">
-            <dt className="text-xs text-[var(--sk-muted)]">Engines</dt>
-            <dd className="mt-0.5 text-base">
-              {a.engines} × {a.engineTypes}
-            </dd>
-          </div>
-        </dl>
-        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-[var(--sk-border)] pt-6">
-          <span className="text-sm text-[var(--sk-muted)]">{position}</span>
-          <div className="flex gap-3">
-            <SkButton variant="secondary" onClick={onPrev}>
-              ← Previous
-            </SkButton>
-            <SkButton onClick={onNext}>Next aircraft →</SkButton>
-          </div>
-        </div>
-      </div>
-    </article>
   );
 }

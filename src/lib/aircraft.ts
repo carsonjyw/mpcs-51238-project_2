@@ -153,7 +153,7 @@ export const aircraft: Aircraft[] = [
     engineTypes: "GEnx-2B",
     firstService: 2012,
     inProduction: false,
-    seats: 467,
+    seats: 410,
     rangeKm: 14320,
     lengthM: 76.3,
     spanM: 68.4,

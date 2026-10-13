@@ -1,10 +1,11 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { SkCard, SkDetail, SkDialog, SkSelect, SkTabs } from "@/components/ds/sky";
+import { SkProfileCard, SkSelect, SkTabs } from "@/components/ds/sky";
 import { aircraft, type Aircraft } from "@/lib/aircraft";
+import { profiles } from "@/lib/profiles";
 
-// The interactive fleet: manufacturer filter, sort, card grid, and detail panel.
+// The fleet: manufacturer filter, sort, and cards linking to each aircraft's profile.
 // All state lives in memory; nothing is saved.
 
 const makers = ["All", "Airbus", "Boeing"] as const;
@@ -22,15 +23,7 @@ function sortFleet(list: Aircraft[], by: string) {
 export default function Explorer() {
   const [maker, setMaker] = useState<string>("All");
   const [sort, setSort] = useState<string>("Longest range");
-  const [openId, setOpenId] = useState<string | null>(null);
-
-  const fleet = useMemo(
-    () => sortFleet(maker === "All" ? aircraft : aircraft.filter((a) => a.manufacturer === maker), sort),
-    [maker, sort],
-  );
-  const index = fleet.findIndex((a) => a.id === openId);
-  const open = index >= 0 ? fleet[index] : null;
-  const step = (d: number) => setOpenId(fleet[(index + d + fleet.length) % fleet.length].id);
+  const fleet = useMemo(() => sortFleet(maker === "All" ? aircraft : aircraft.filter((a) => a.manufacturer === maker), sort), [maker, sort]);
 
   return (
     <>
@@ -41,25 +34,13 @@ export default function Explorer() {
       <p aria-live="polite" className="mt-6 text-sm text-[var(--sk-muted)]">
         {maker === "All" ? `All ${fleet.length} aircraft` : `${fleet.length} ${maker} aircraft`} · sorted by {sort.toLowerCase()}
       </p>
-
-      <div id="fleet-grid" role="tabpanel" aria-label={`${maker} aircraft`} className="mt-6 grid gap-6 md:grid-cols-2 lg:gap-8">
+      <ul id="fleet-grid" role="tabpanel" aria-label={`${maker} aircraft`} className="mt-6 grid gap-6 md:grid-cols-2 lg:gap-8">
         {fleet.map((a) => (
-          <SkCard key={a.id} a={a} selected={a.id === openId} onOpen={() => setOpenId(a.id)} />
+          <li key={a.id}>
+            <SkProfileCard a={a} tagline={profiles[a.id].tagline} href={`/aircraft-explorer/${a.id}`} />
+          </li>
         ))}
-      </div>
-
-      <SkDialog open={!!open} onClose={() => setOpenId(null)} labelledBy="aircraft-title" className="max-w-3xl">
-        {open && (
-          <SkDetail
-            a={open}
-            headingId="aircraft-title"
-            position={`${index + 1} of ${fleet.length}${maker === "All" ? "" : ` ${maker}`} aircraft`}
-            onClose={() => setOpenId(null)}
-            onPrev={() => step(-1)}
-            onNext={() => step(1)}
-          />
-        )}
-      </SkDialog>
+      </ul>
     </>
   );
 }
