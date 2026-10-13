@@ -297,7 +297,7 @@ export default function AviationEditorialSystem() {
               <p className="font-display text-4xl leading-tight text-[var(--ed-ink)]">
                 Nothing in the archive <em>matches.</em>
               </p>
-              <p className="text-lg italic text-[var(--ed-muted)]">No four-engine narrow-bodies were ever built. Try removing a filter.</p>
+              <p className="text-lg italic text-[var(--ed-muted)]">No aircraft in this collection match both filters. Try removing a filter.</p>
               <div>
                 <EdButton variant="secondary">Clear filters</EdButton>
               </div>

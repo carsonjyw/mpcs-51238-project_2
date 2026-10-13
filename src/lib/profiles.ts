@@ -336,7 +336,7 @@ export const profiles: Record<string, Profile> = {
       "Emirates is the largest operator of the 777.",
     ],
     engines: [{ maker: "GE Aerospace", model: "GE90-115B", note: "The only engine offered on the 777-300ER." }],
-    status: "In airline service worldwide; succeeded by the 777-9",
+    status: "In airline service worldwide; the 777-9 is its planned successor.",
     firstFlight: "2003",
     heightM: 18.5,
     cabinWidth: "5.9 m",

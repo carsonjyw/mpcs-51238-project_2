@@ -21,7 +21,7 @@ export const skyPalette: Palette = {
     { role: "Text", name: "Ink", hex: "#18212c", use: "Headings and body" },
     { role: "Muted text", name: "Slate", hex: "#4a5664", use: "Captions, labels, help text" },
     { role: "Border", name: "Haze", hex: "#dfe6ee", use: "Card edges and dividers" },
-    { role: "Control border", name: "Altitude", hex: "#8496aa", use: "Input and checkbox outlines" },
+    { role: "Control border", name: "Altitude", hex: "#7b8da2", use: "Input and checkbox outlines" },
     { role: "Accent", name: "Horizon", hex: "#2f6fb0", use: "Primary actions, links, selection" },
   ],
   semantic: [
@@ -39,7 +39,7 @@ export const skyTokens = {
   "--sk-text": "#18212c",
   "--sk-muted": "#4a5664",
   "--sk-border": "#dfe6ee",
-  "--sk-control": "#8496aa",
+  "--sk-control": "#7b8da2",
   "--sk-accent": "#2f6fb0",
   "--sk-accent-hover": "#285f98",
   "--sk-accent-press": "#1f4f80",
