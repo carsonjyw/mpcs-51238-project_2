@@ -36,6 +36,22 @@ export function SkButton({
   );
 }
 
+// Outlined, secondary action that navigates: Horizon Blue border and text on white.
+export function SkOutlineLink({ href, state, children }: { href: string; state?: ControlState; children: ReactNode }) {
+  return (
+    <Link
+      href={href}
+      {...(state && state !== "selected" && state !== "disabled" ? { "data-state": state } : {})}
+      className={`group inline-flex h-11 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full bg-white px-6 text-sm font-semibold text-[var(--sk-accent)] ring-1 ring-inset ring-[var(--sk-accent)] transition-[background-color,color,transform] duration-150 hov:bg-[var(--sk-mist)] prs:scale-[0.97] prs:bg-[#e2eaf3] prs:text-[var(--sk-accent-press)] ${ring}`}
+    >
+      {children}
+      <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
+        →
+      </span>
+    </Link>
+  );
+}
+
 export function SkLink({ state, children }: { state?: ControlState; children: ReactNode }) {
   return (
     <a

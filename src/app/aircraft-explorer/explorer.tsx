@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { SkProfileCard, SkSelect, SkTabs } from "@/components/ds/sky";
+import { SkOutlineLink, SkProfileCard, SkSelect, SkTabs } from "@/components/ds/sky";
 import { aircraft, type Aircraft } from "@/lib/aircraft";
 import { profiles } from "@/lib/profiles";
 
@@ -27,9 +27,12 @@ export default function Explorer() {
 
   return (
     <>
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <SkTabs options={[...makers]} value={maker} onChange={setMaker} ariaLabel="Manufacturer" controls="fleet-grid" />
-        <SkSelect label="Sort by" options={[...sorts]} value={sort} onChange={setSort} inline />
+        <div className="flex flex-wrap items-center gap-3 sm:gap-4">
+          <SkSelect label="Sort by" options={[...sorts]} value={sort} onChange={setSort} inline />
+          <SkOutlineLink href="/aircraft-explorer/compare">Compare Aircraft</SkOutlineLink>
+        </div>
       </div>
       <p aria-live="polite" className="mt-6 text-sm text-[var(--sk-muted)]">
         {maker === "All" ? `All ${fleet.length} aircraft` : `${fleet.length} ${maker} aircraft`} · sorted by {sort.toLowerCase()}
