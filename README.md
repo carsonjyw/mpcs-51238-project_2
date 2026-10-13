@@ -11,6 +11,12 @@ The homepage is a hub that links to:
 
 No database, backend, accounts, external APIs, or persistent storage. All aircraft data is local and static.
 
+## Photographs
+
+All photographs are freely licensed images from Wikimedia Commons (CC BY, CC BY-SA, CC0, or public domain),
+resized and stored in `public/photos`. Author, license, and source for each are in `src/lib/photo-credits.json`
+and are credited at the bottom of every page that uses them.
+
 ## Run locally
 
 ```bash

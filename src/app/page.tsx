@@ -30,7 +30,7 @@ function Arrow() {
 export default function Hub() {
   return (
     <main className="mx-auto w-full max-w-6xl flex-1 px-5 py-12 sm:px-8 sm:py-20">
-      <header className="mb-14 sm:mb-20">
+      <header className="mb-10 sm:mb-14">
         <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted">
           Design, Build, Ship · Assignment 2 · UI/UX &amp; Visual Design
         </p>

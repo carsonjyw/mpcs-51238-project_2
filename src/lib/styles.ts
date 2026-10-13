@@ -1,5 +1,5 @@
 // The three visual directions explored in this project.
-// Swatches are early guesses for the hub preview; the mood boards define the real palettes.
+// Swatches mirror each mood board's palette for the hub preview.
 
 export type StyleDirection = {
   slug: string;
@@ -13,19 +13,19 @@ export const styles: StyleDirection[] = [
     slug: "sky-minimal",
     name: "Sky Minimal",
     summary: "Premium airline sites. White, soft blue, generous whitespace.",
-    swatches: ["#ffffff", "#eef3f8", "#a9c4de", "#2f6fb0", "#1b2430"],
+    swatches: ["#ffffff", "#eef3f8", "#a9c4de", "#2f6fb0", "#18212c"],
   },
   {
     slug: "cockpit-dark",
     name: "Cockpit Dark",
     summary: "Flight deck displays. Deep navy, charcoal, precise cyan.",
-    swatches: ["#0a1220", "#141c2b", "#2a3446", "#5fd4e6", "#e4ebf3"],
+    swatches: ["#070b13", "#0c121d", "#1c2636", "#5fd4e6", "#dfe7f1"],
   },
   {
     slug: "aviation-editorial",
     name: "Aviation Editorial",
     summary: "Aviation magazines. Warm cream, navy type, large headlines.",
-    swatches: ["#f4eee3", "#e6dccb", "#b08a5a", "#1d2a44", "#2b2a27"],
+    swatches: ["#f3ede2", "#e7dccb", "#a4532f", "#1b2742", "#2a2723"],
   },
 ];
 
