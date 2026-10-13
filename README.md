@@ -59,4 +59,4 @@ See [PROCESS.md](PROCESS.md) for how the design evolved: the three directions, t
 
 ## Agent.md
 
-See [Agent.md](Agent.md).
+See [AGENTS.md](AGENTS.md).
