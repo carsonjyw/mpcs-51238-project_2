@@ -336,7 +336,7 @@ export default function AviationEditorialSystem() {
         <div className="mx-auto max-w-[1280px] px-5 py-10 sm:px-10">
           <h2 className={`${edLabel}`}>Photo credits</h2>
           <PhotoCredits
-            slugs={["b777-alitalia", "a380-lufthansa-landing", "a350-delta-flight", "b787-aircanada-approach"]}
+            slugs={["b777-alitalia", "a380-lufthansa-landing", "a350-airbus-ila", "b787-aircanada-approach"]}
             className="mt-4 flex flex-col gap-1.5 text-[13px] leading-relaxed text-[var(--ed-muted)]"
             linkClassName="text-[var(--ed-text)] underline decoration-[var(--ed-rule)] underline-offset-2 hover:decoration-[var(--ed-accent)] focus-visible:outline-2 focus-visible:outline-[var(--ed-accent)]"
           />

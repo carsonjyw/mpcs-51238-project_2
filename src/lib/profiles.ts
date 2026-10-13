@@ -174,11 +174,12 @@ export const profiles: Record<string, Profile> = {
       },
     ],
     gallery: [
-      { slug: "a350-delta-flight", category: "Exterior" },
+      { slug: "a350-airbus-ila", category: "Exterior" },
       { slug: "a350-sia-10000", category: "Exterior" },
       { slug: "a350-cathay-takeoff", category: "Exterior" },
       { slug: "a350-edelweiss", category: "Exterior" },
       { slug: "a350-fiji-landing", category: "Exterior" },
+      { slug: "a350-delta-flight", category: "Exterior" },
       { slug: "a350-cockpit", category: "Cockpit" },
       { slug: "a350-simulator", category: "Cockpit" },
       { slug: "a350-af-economy", category: "Cabin" },

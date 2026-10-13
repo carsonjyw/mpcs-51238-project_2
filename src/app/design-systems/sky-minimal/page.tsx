@@ -356,7 +356,7 @@ export default function SkyMinimalSystem() {
         <div className="mx-auto max-w-[1280px] px-5 py-10 sm:px-10">
           <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--sk-muted)]">Photo credits</h2>
           <PhotoCredits
-            slugs={["a380-lufthansa-landing", "b787-aircanada-approach", "a350-delta-flight"]}
+            slugs={["a380-lufthansa-landing", "b787-aircanada-approach", "a350-airbus-ila"]}
             className="mt-4 flex flex-col gap-1.5 text-xs leading-relaxed text-[var(--sk-muted)]"
             linkClassName="underline decoration-[var(--sk-haze)] underline-offset-2 hover:text-[var(--sk-text)] hover:decoration-[var(--sk-accent)] focus-visible:outline-2 focus-visible:outline-[var(--sk-accent)]"
           />

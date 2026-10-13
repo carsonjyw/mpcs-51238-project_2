@@ -74,7 +74,7 @@ export const aircraft: Aircraft[] = [
     spanM: 64.8,
     mtowT: 283,
     summary: "A long-haul twin built largely from carbon composites, with a quiet, high cabin.",
-    photo: "a350-delta-flight",
+    photo: "a350-airbus-ila",
   },
   {
     id: "a380",

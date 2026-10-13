@@ -133,7 +133,13 @@ function Gallery({ a, p }: { a: Aircraft; p: Profile }) {
               aria-label={`View larger: ${g.info.caption}`}
               className="group relative block aspect-[4/3] h-full w-full overflow-hidden rounded-[18px] bg-[var(--sk-mist)] text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--sk-accent)] active:scale-[0.99]"
             >
-              <Photo slug={g.slug} sizes="(min-width: 1024px) 33vw, 50vw" className="transition-transform duration-700 group-hover:scale-[1.04]" eager />
+              <Photo
+                slug={g.slug}
+                sizes={i === 0 && cat === "All" ? "(min-width: 1024px) 66vw, 100vw" : "(min-width: 1024px) 33vw, 50vw"}
+                large={i === 0 && cat === "All"}
+                className="transition-transform duration-700 group-hover:scale-[1.04]"
+                eager
+              />
               <span className="absolute bottom-2 left-2 rounded-full bg-white/90 px-2.5 py-1 text-xs font-semibold text-[var(--sk-text)] backdrop-blur">
                 {g.category}
               </span>
@@ -166,7 +172,7 @@ function Gallery({ a, p }: { a: Aircraft; p: Profile }) {
               </button>
             </div>
             <div className="relative aspect-[3/2] bg-[#0f1520]">
-              <Photo slug={current.slug} sizes="(min-width: 1024px) 1024px, 100vw" contain eager />
+              <Photo slug={current.slug} sizes="(min-width: 1024px) 1024px, 100vw" contain eager large />
             </div>
             <div className="flex flex-col gap-4 px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-6">
               <div>

@@ -62,7 +62,7 @@ export default function AircraftExplorer() {
 
           <figure className="mt-12 sm:mt-14">
             <div className="relative aspect-[4/3] overflow-hidden rounded-[28px] bg-[var(--sk-mist)] sm:aspect-[16/8] lg:aspect-[21/9]">
-              <Photo slug="a380-emirates-eer" sizes="(min-width: 1280px) 1200px, 100vw" preload position="50% 45%" />
+              <Photo slug="a380-emirates-eer" sizes="(min-width: 1280px) 1200px, 100vw" preload large position="50% 45%" />
             </div>
             <figcaption className="mt-3 text-xs text-[var(--sk-muted)]">Airbus A380, Emirates, climbing out of Munich.</figcaption>
           </figure>

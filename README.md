@@ -4,6 +4,8 @@ Assignment 2 for Design, Build, Ship (MPCS 51238): UI/UX & Visual Design.
 
 A static Next.js and Tailwind CSS site about eight modern commercial passenger aircraft from Airbus and Boeing. It is aimed at aviation enthusiasts, students, and anyone curious about commercial aviation.
 
+For all project credits/cites: [CRDITS.md](CRDITS.md) 
+
 ## Vercel App
 https://mpcs-51238-project-2.vercel.app
 

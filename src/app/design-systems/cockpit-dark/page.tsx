@@ -372,7 +372,7 @@ export default function CockpitDarkSystem() {
         <div className="mx-auto max-w-[1280px] px-4 py-8 sm:px-8">
           <h2 className="font-cockpit text-[11px] uppercase tracking-[0.16em] text-[var(--ck-muted)]">Photo credits</h2>
           <PhotoCredits
-            slugs={["a350-delta-flight", "b787-aircanada-approach", "b747-8-lufthansa"]}
+            slugs={["a350-airbus-ila", "b787-aircanada-approach", "b747-8-lufthansa"]}
             className="mt-3 flex flex-col gap-1 font-cockpit text-[11px] leading-relaxed text-[var(--ck-muted)]"
             linkClassName="text-[var(--ck-text)] underline decoration-[var(--ck-border)] underline-offset-2 hover:text-[var(--ck-accent)] focus-visible:outline-1 focus-visible:outline-[var(--ck-accent)]"
           />

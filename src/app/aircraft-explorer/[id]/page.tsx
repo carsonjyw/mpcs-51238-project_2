@@ -90,7 +90,7 @@ async function AircraftProfile({ params }: { params: Promise<{ id: string }> }) 
 
       <figure>
         <div className="relative aspect-[4/3] overflow-hidden rounded-[28px] bg-[var(--sk-mist)] sm:aspect-[21/9]">
-          <Photo slug={hero.slug} sizes="(min-width: 1280px) 1200px, 100vw" preload />
+          <Photo slug={hero.slug} sizes="(min-width: 1280px) 1200px, 100vw" preload large />
         </div>
       </figure>
 
