@@ -136,7 +136,7 @@ export default function CockpitDarkSystem() {
       <div className="mx-auto max-w-[1280px] px-4 sm:px-8">
         <section className="grid gap-6 py-10 sm:py-14 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
-            <p className="font-cockpit text-xs uppercase tracking-[0.2em] text-[var(--ck-accent)]">Design system · Chosen style</p>
+            <p className="font-cockpit text-xs uppercase tracking-[0.2em] text-[var(--ck-accent)]">Design system · 2 of 3</p>
             <h1 className="mt-3 font-cond text-5xl font-light uppercase leading-[0.9] tracking-[0.02em] sm:text-7xl">Cockpit Dark</h1>
           </div>
           <p className="max-w-md text-base leading-relaxed text-[#c2cddb] lg:col-span-5">
@@ -372,7 +372,7 @@ export default function CockpitDarkSystem() {
         <div className="mx-auto max-w-[1280px] px-4 py-8 sm:px-8">
           <h2 className="font-cockpit text-[11px] uppercase tracking-[0.16em] text-[var(--ck-muted)]">Photo credits</h2>
           <PhotoCredits
-            slugs={["a350-delta-flight", "b787-aircanada-approach", "b747-8-retro"]}
+            slugs={["a350-delta-flight", "b787-aircanada-approach", "b747-8-lufthansa"]}
             className="mt-3 flex flex-col gap-1 font-cockpit text-[11px] leading-relaxed text-[var(--ck-muted)]"
             linkClassName="text-[var(--ck-text)] underline decoration-[var(--ck-border)] underline-offset-2 hover:text-[var(--ck-accent)] focus-visible:outline-1 focus-visible:outline-[var(--ck-accent)]"
           />

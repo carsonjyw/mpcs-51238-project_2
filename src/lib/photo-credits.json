@@ -38,8 +38,8 @@
   "license": "CC BY-SA 2.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
   "source": "https://commons.wikimedia.org/wiki/File:Boeing_787-9_Dreamliner_PH-BHP_(51009491128).jpg",
-  "width": 1600,
-  "height": 984,
+  "width": 2400,
+  "height": 1475,
   "caption": "Boeing 787-9, KLM",
   "src": "/photos/b787-klm-clouds.jpg"
  },
@@ -328,5 +328,60 @@
   "height": 1067,
   "caption": "Airbus A320neo test aircraft in haze, Tarbes",
   "src": "/photos/a320neo-haze.jpg"
+ },
+ "a320neo-avianca": {
+  "title": "Avianca Airbus A320neo N962AV departing Boston June 2025 2.jpg",
+  "author": "4300streetcar",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Avianca_Airbus_A320neo_N962AV_departing_Boston_June_2025_2.jpg",
+  "width": 1600,
+  "height": 1200,
+  "caption": "Airbus A320neo, Avianca, departing Boston",
+  "src": "/photos/a320neo-avianca.jpg"
+ },
+ "a321neo-aerlingus": {
+  "title": "Airbus A321neo EI-LRE MD1.jpg",
+  "author": "Acroterion",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Airbus_A321neo_EI-LRE_MD1.jpg",
+  "width": 1600,
+  "height": 844,
+  "caption": "Airbus A321neo, Aer Lingus, in flight",
+  "src": "/photos/a321neo-aerlingus.jpg"
+ },
+ "b737max-icelandair": {
+  "title": "Icelandair Boeing 737-8 MAX TF-ICF MD2.jpg",
+  "author": "Acroterion",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Icelandair_Boeing_737-8_MAX_TF-ICF_MD2.jpg",
+  "width": 1600,
+  "height": 946,
+  "caption": "Boeing 737 MAX 8, Icelandair, in flight",
+  "src": "/photos/b737max-icelandair.jpg"
+ },
+ "b777-alitalia": {
+  "title": "Alitalia Boeing 777-3Q8(ER) EI-WLA departing JFK Airport (cropped).jpg",
+  "author": "Adam Moreira (AEMoreira042281)",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Alitalia_Boeing_777-3Q8(ER)_EI-WLA_departing_JFK_Airport_(cropped).jpg",
+  "width": 1600,
+  "height": 963,
+  "caption": "Boeing 777-300ER, Alitalia, departing JFK",
+  "src": "/photos/b777-alitalia.jpg"
+ },
+ "b747-8-lufthansa": {
+  "title": "Lufthansa Boeing 747-8 D-ABYP MD1.jpg",
+  "author": "Acroterion",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Lufthansa_Boeing_747-8_D-ABYP_MD1.jpg",
+  "width": 1600,
+  "height": 883,
+  "caption": "Boeing 747-8, Lufthansa, in flight",
+  "src": "/photos/b747-8-lufthansa.jpg"
  }
 }

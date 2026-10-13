@@ -86,7 +86,7 @@ export default function Hub() {
         </section>
 
         <section aria-labelledby="the-site">
-          <SectionHeading id="the-site" index="03" title="The Site" note="Built in the chosen style" />
+          <SectionHeading id="the-site" index="03" title="The Site" note="Built in Sky Minimal, the chosen style" />
           <Link
             href={site.href}
             className={`${cardClass} gap-2 border-foreground bg-foreground text-background hover:bg-foreground/90 sm:flex-row sm:items-center sm:justify-between sm:p-8`}

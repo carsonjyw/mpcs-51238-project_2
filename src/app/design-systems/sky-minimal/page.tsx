@@ -82,7 +82,7 @@ export default function SkyMinimalSystem() {
 
       <div className="mx-auto max-w-[1280px] px-5 sm:px-10">
         <section className="pb-16 pt-14 sm:pb-24 sm:pt-24">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--sk-accent)]">Design system 1 of 3</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--sk-accent)]">Design system 1 of 3 · Chosen for the site</p>
           <h1 className="mt-4 text-6xl font-extralight tracking-[-0.03em] sm:text-8xl">Sky Minimal</h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-[var(--sk-muted)]">
             Pills, soft light, and one blue. Built from the mood board for a calm, premium aircraft

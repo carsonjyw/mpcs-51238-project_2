@@ -95,12 +95,30 @@ export function SkInput({
   );
 }
 
-export function SkSelect({ label, options, state }: { label: string; options: string[]; state?: ControlState }) {
+export function SkSelect({
+  label,
+  options,
+  state,
+  value,
+  onChange,
+  inline = false,
+}: {
+  label: string;
+  options: string[];
+  state?: ControlState;
+  value?: string;
+  onChange?: (v: string) => void;
+  inline?: boolean; // label sits beside the field instead of above it
+}) {
   return (
-    <label className="flex min-w-0 flex-col gap-2">
-      <span className="text-xs font-semibold text-[var(--sk-text)]">{label}</span>
+    <label className={`flex min-w-0 gap-2 ${inline ? "items-center gap-3" : "flex-col"}`}>
+      <span className={`text-xs font-semibold text-[var(--sk-text)] ${inline ? "shrink-0" : ""}`}>{label}</span>
       <span className="relative">
-        <select {...forceState(state)} className={`${field} cursor-pointer appearance-none pr-10`}>
+        <select
+          {...forceState(state)}
+          {...(value !== undefined ? { value, onChange: (e: React.ChangeEvent<HTMLSelectElement>) => onChange?.(e.target.value) } : {})}
+          className={`${field} cursor-pointer appearance-none pr-10`}
+        >
           {options.map((o) => (
             <option key={o}>{o}</option>
           ))}
@@ -171,7 +189,7 @@ export function SkSegment({
   state,
   children,
   ...rest
-}: ButtonHTMLAttributes<HTMLButtonElement> & { selected?: boolean; state?: ControlState }) {
+}: ButtonHTMLAttributes<HTMLButtonElement> & { selected?: boolean; state?: ControlState; ref?: React.Ref<HTMLButtonElement> }) {
   return (
     <button
       type="button"
@@ -186,11 +204,42 @@ export function SkSegment({
   );
 }
 
-export function SkTabs({ options, value, onChange }: { options: string[]; value: string; onChange: (v: string) => void }) {
+export function SkTabs({
+  options,
+  value,
+  onChange,
+  ariaLabel = "Manufacturer",
+  controls,
+}: {
+  options: string[];
+  value: string;
+  onChange: (v: string) => void;
+  ariaLabel?: string;
+  controls?: string;
+}) {
+  const refs = useRef<(HTMLButtonElement | null)[]>([]);
+  function onKey(e: React.KeyboardEvent, i: number) {
+    const dir = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+    if (!dir) return;
+    e.preventDefault();
+    const next = (i + dir + options.length) % options.length;
+    onChange(options[next]);
+    refs.current[next]?.focus();
+  }
   return (
-    <div role="tablist" aria-label="Manufacturer" className="inline-flex max-w-full self-start rounded-full bg-[var(--sk-mist)] p-1">
-      {options.map((o) => (
-        <SkSegment key={o} selected={o === value} onClick={() => onChange(o)} tabIndex={o === value ? 0 : -1}>
+    <div role="tablist" aria-label={ariaLabel} className="inline-flex max-w-full self-start rounded-full bg-[var(--sk-mist)] p-1">
+      {options.map((o, i) => (
+        <SkSegment
+          key={o}
+          ref={(el) => {
+            refs.current[i] = el;
+          }}
+          selected={o === value}
+          aria-controls={controls}
+          onClick={() => onChange(o)}
+          onKeyDown={(e) => onKey(e, i)}
+          tabIndex={o === value ? 0 : -1}
+        >
           {o}
         </SkSegment>
       ))}
@@ -229,33 +278,57 @@ export function SkBadge({ tone = "neutral", children }: { tone?: keyof typeof ba
   return <span className={`inline-flex h-6 items-center rounded-full px-2.5 text-xs font-semibold ${badgeTone[tone]}`}>{children}</span>;
 }
 
-export function SkCard({ a, state, onOpen }: { a: Aircraft; state?: ControlState; onOpen?: () => void }) {
+export function SkCard({
+  a,
+  state,
+  selected,
+  onOpen,
+}: {
+  a: Aircraft;
+  state?: ControlState;
+  selected?: boolean;
+  onOpen?: () => void;
+}) {
   return (
     <button
       type="button"
       onClick={onOpen}
       aria-haspopup="dialog"
-      {...(state === "selected" ? { "aria-pressed": true } : {})}
+      {...(state === "selected" || selected ? { "aria-pressed": true } : {})}
       {...forced(state)}
       className={`group flex w-full flex-col overflow-hidden rounded-[22px] bg-white text-left ring-1 ring-[var(--sk-border)] transition-[box-shadow,transform] duration-200 hov:-translate-y-1 hov:shadow-[0_18px_40px_-18px_rgba(24,33,44,0.28)] prs:translate-y-0 prs:shadow-none sel:ring-2 sel:ring-[var(--sk-accent)] dis:cursor-not-allowed dis:opacity-50 ${ring}`}
     >
-      <span className="relative block aspect-[4/3] bg-[var(--sk-mist)]"><AircraftPhoto a={a} sizes="(min-width: 1024px) 25vw, 100vw" /></span>
-      <span className="flex flex-col gap-4 p-5">
-        <span className="flex items-baseline justify-between gap-3">
-          <span className="text-lg font-semibold text-[var(--sk-text)]">
-            {a.manufacturer} {a.name}
+      <span className="relative block aspect-[16/10] overflow-hidden bg-[var(--sk-mist)] text-[var(--sk-control)]">
+        <AircraftPhoto
+          a={a}
+          sizes="(min-width: 768px) 50vw, 100vw"
+          className="transition-transform duration-700 group-hover:scale-[1.03]"
+        />
+      </span>
+      <span className="flex flex-col gap-5 p-6">
+        <span className="flex items-start justify-between gap-4">
+          <span>
+            <span className="block text-xs font-semibold uppercase tracking-[0.14em] text-[var(--sk-muted)]">
+              {a.manufacturer} · {a.body}
+            </span>
+            <span className="mt-1 block text-2xl font-light tracking-tight text-[var(--sk-text)]">{a.name}</span>
           </span>
-          <span className="text-xs text-[var(--sk-muted)]">{a.body}</span>
+          <span className="mt-1 inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-[var(--sk-muted)] transition-colors group-hover:text-[var(--sk-accent)] group-aria-pressed:text-[var(--sk-accent)]">
+            Details
+            <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
+              →
+            </span>
+          </span>
         </span>
-        <span className="grid grid-cols-3 text-xs">
+        <span className="grid grid-cols-3 border-t border-[var(--sk-border)] pt-4 text-xs">
           {[
             ["Range", `${fmt(a.rangeKm)} km`],
             ["Seats", `${a.seats}`],
-            ["Span", `${a.spanM} m`],
+            ["Wingspan", `${a.spanM} m`],
           ].map(([k, v]) => (
             <span key={k}>
               <span className="block text-[var(--sk-muted)]">{k}</span>
-              <span className="font-semibold text-[var(--sk-text)]">{v}</span>
+              <span className="text-sm font-semibold text-[var(--sk-text)]">{v}</span>
             </span>
           ))}
         </span>
@@ -340,7 +413,20 @@ export function SkSheet({ a, onClose, headingId }: { a: Aircraft; onClose?: () =
   );
 }
 
-export function SkModal({ a, open, onClose }: { a: Aircraft; open: boolean; onClose: () => void }) {
+// Native modal dialog: focus moves inside, Escape closes, focus returns to the trigger.
+export function SkDialog({
+  open,
+  onClose,
+  labelledBy,
+  className = "max-w-lg",
+  children,
+}: {
+  open: boolean;
+  onClose: () => void;
+  labelledBy: string;
+  className?: string;
+  children: ReactNode;
+}) {
   const ref = useRef<HTMLDialogElement>(null);
   useEffect(() => {
     const d = ref.current;
@@ -353,10 +439,98 @@ export function SkModal({ a, open, onClose }: { a: Aircraft; open: boolean; onCl
       ref={ref}
       onClose={onClose}
       onClick={(e) => e.target === ref.current && onClose()}
-      aria-labelledby="sk-modal-title"
-      className="m-auto w-[calc(100%-32px)] max-w-lg rounded-[28px] bg-transparent p-0 shadow-[0_32px_64px_-16px_rgba(24,33,44,0.35)] backdrop:bg-[rgba(238,243,248,0.7)] backdrop:backdrop-blur-sm"
+      aria-labelledby={labelledBy}
+      className={`m-auto max-h-[92dvh] w-[calc(100%-24px)] overflow-y-auto rounded-[28px] bg-white p-0 text-[var(--sk-text)] shadow-[0_32px_64px_-16px_rgba(24,33,44,0.35)] backdrop:bg-[rgba(238,243,248,0.75)] backdrop:backdrop-blur-sm ${className}`}
     >
-      <SkSheet a={a} onClose={onClose} headingId="sk-modal-title" />
+      {children}
     </dialog>
+  );
+}
+
+export function SkModal({ a, open, onClose }: { a: Aircraft; open: boolean; onClose: () => void }) {
+  return (
+    <SkDialog open={open} onClose={onClose} labelledBy="sk-modal-title" className="max-w-lg">
+      <SkSheet a={a} onClose={onClose} headingId="sk-modal-title" />
+    </SkDialog>
+  );
+}
+
+// Full aircraft profile for the detail panel on the Aircraft Explorer site.
+export function SkDetail({
+  a,
+  onClose,
+  onPrev,
+  onNext,
+  position,
+  headingId,
+}: {
+  a: Aircraft;
+  onClose: () => void;
+  onPrev: () => void;
+  onNext: () => void;
+  position: string;
+  headingId: string;
+}) {
+  const specs: [string, string][] = [
+    ["Range", `${fmt(a.rangeKm)} km`],
+    ["Typical seats", `${a.seats}`],
+    ["Length", `${a.lengthM} m`],
+    ["Wingspan", `${a.spanM} m`],
+    ["Max takeoff weight", `${a.mtowT} t`],
+    ["In service since", `${a.firstService}`],
+  ];
+  return (
+    <article>
+      <div className="relative aspect-[16/9] bg-[var(--sk-mist)] text-[var(--sk-control)]">
+        <AircraftPhoto a={a} sizes="(min-width: 768px) 720px, 100vw" />
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Close details"
+          className={`absolute right-4 top-4 grid size-10 place-items-center rounded-full bg-white/90 text-[var(--sk-text)] shadow-[0_2px_8px_rgba(24,33,44,0.15)] backdrop-blur transition hov:bg-white prs:scale-95 ${ring}`}
+        >
+          <svg viewBox="0 0 12 12" className="size-3" aria-hidden>
+            <path d="M1 1l10 10M11 1L1 11" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+          </svg>
+        </button>
+      </div>
+      <div className="flex flex-col gap-6 p-6 sm:p-10">
+        <div className="flex flex-col gap-3">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--sk-muted)]">
+            {a.manufacturer} · {a.body} · {a.engines} engines
+          </p>
+          <h2 id={headingId} className="text-4xl font-extralight tracking-[-0.02em] sm:text-5xl">
+            {a.manufacturer} {a.name}
+          </h2>
+          <div className="flex flex-wrap gap-2">
+            <SkBadge tone={a.inProduction ? "success" : "warning"}>{a.inProduction ? "In production" : "Production ended"}</SkBadge>
+          </div>
+        </div>
+        <p className="max-w-xl text-lg leading-relaxed text-[var(--sk-muted)]">{a.summary}</p>
+        <dl className="grid grid-cols-2 gap-x-6 gap-y-5 rounded-[20px] bg-[var(--sk-mist)] p-5 sm:grid-cols-3 sm:p-6">
+          {specs.map(([k, v]) => (
+            <div key={k}>
+              <dt className="text-xs text-[var(--sk-muted)]">{k}</dt>
+              <dd className="mt-0.5 text-xl font-light tabular-nums">{v}</dd>
+            </div>
+          ))}
+          <div className="col-span-2 sm:col-span-3">
+            <dt className="text-xs text-[var(--sk-muted)]">Engines</dt>
+            <dd className="mt-0.5 text-base">
+              {a.engines} × {a.engineTypes}
+            </dd>
+          </div>
+        </dl>
+        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-[var(--sk-border)] pt-6">
+          <span className="text-sm text-[var(--sk-muted)]">{position}</span>
+          <div className="flex gap-3">
+            <SkButton variant="secondary" onClick={onPrev}>
+              ← Previous
+            </SkButton>
+            <SkButton onClick={onNext}>Next aircraft →</SkButton>
+          </div>
+        </div>
+      </div>
+    </article>
   );
 }

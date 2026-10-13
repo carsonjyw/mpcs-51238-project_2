@@ -40,7 +40,7 @@ export const aircraft: Aircraft[] = [
     spanM: 35.8,
     mtowT: 79,
     summary: "The best-selling single-aisle family, re-engined for lower fuel burn and noise.",
-    photo: "a320neo-haze",
+    photo: "a320neo-avianca",
   },
   {
     id: "a321neo",
@@ -57,7 +57,7 @@ export const aircraft: Aircraft[] = [
     spanM: 35.8,
     mtowT: 97,
     summary: "A stretched A320neo that flies some transatlantic routes with a single aisle.",
-    photo: "a321neo-above-cloud",
+    photo: "a321neo-aerlingus",
   },
   {
     id: "a350-900",
@@ -108,7 +108,7 @@ export const aircraft: Aircraft[] = [
     spanM: 35.9,
     mtowT: 82.2,
     summary: "The fourth generation of the 737, with new engines and split-tip winglets.",
-    photo: "b737max-contrails",
+    photo: "b737max-icelandair",
   },
   {
     id: "777-300er",
@@ -125,7 +125,7 @@ export const aircraft: Aircraft[] = [
     spanM: 64.8,
     mtowT: 351.5,
     summary: "The long-range twin that replaced many four-engine jets on intercontinental routes.",
-    photo: "b777-cathay-runway",
+    photo: "b777-alitalia",
   },
   {
     id: "787-9",
@@ -159,7 +159,7 @@ export const aircraft: Aircraft[] = [
     spanM: 68.4,
     mtowT: 447.7,
     summary: "The final, longest version of the original jumbo jet, with 787-era engines.",
-    photo: "b747-8-retro",
+    photo: "b747-8-lufthansa",
   },
 ];
 
