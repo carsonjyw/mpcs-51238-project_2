@@ -7,7 +7,10 @@ The homepage is a hub that links to:
 
 - three mood boards: `/mood-boards/sky-minimal`, `/mood-boards/cockpit-dark`, `/mood-boards/aviation-editorial`
 - three design systems built from them: `/design-systems/...`
-- the site itself, in the chosen style: `/aircraft-explorer`
+- the site itself, built in the chosen style, Sky Minimal: `/aircraft-explorer`
+  - a profile for each of eight aircraft: `/aircraft-explorer/a350-900`, `/aircraft-explorer/a380`, and so on
+    (overview, photo gallery, illustrative cabin layout, engines and specifications)
+  - a side-by-side comparison of two or three aircraft: `/aircraft-explorer/compare`
 
 No database, backend, accounts, external APIs, or persistent storage. All aircraft data is local and static.
 

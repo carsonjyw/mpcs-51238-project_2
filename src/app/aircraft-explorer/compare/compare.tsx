@@ -220,8 +220,11 @@ export default function Compare() {
                   const isLead = v !== undefined && v === lead && new Set(nums).size > 1;
                   return (
                     <div key={a.id} className="min-w-0">
-                      <span className="sr-only">{a.name}: </span>
-                      <span className={`break-words tabular-nums ${isLead ? "font-semibold" : ""}`}>{row.value(a)}</span>
+                      <span className="mb-1 block truncate text-[11px] font-semibold uppercase tracking-[0.08em] text-[var(--sk-muted)] md:sr-only">
+                        {a.name}
+                        <span className="sr-only">: </span>
+                      </span>
+                      <span className={`break-words text-sm tabular-nums sm:text-base ${isLead ? "font-semibold" : ""}`}>{row.value(a)}</span>
                       {v !== undefined && row.max && (
                         <span aria-hidden className="mt-2 block h-1.5 overflow-hidden rounded-full bg-[var(--sk-mist)]">
                           <span className="block h-full rounded-full" style={{ width: `${(v / row.max) * 100}%`, background: isLead ? "var(--sk-text)" : "#a9c4de" }} />
