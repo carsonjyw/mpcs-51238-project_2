@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+/* Neutral tokens for the hub and placeholder pages.
+   Each style direction defines its own tokens on its own pages. */
+:root {
+  --background: #f6f6f4;
+  --surface: #ffffff;
+  --foreground: #16181b;
+  --muted: #5d636b;
+  --border: #dcddd9;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
