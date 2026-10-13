@@ -1,6 +1,7 @@
 import {
   Archivo,
   IBM_Plex_Mono,
+  IBM_Plex_Sans,
   IBM_Plex_Sans_Condensed,
   Instrument_Serif,
   Manrope,
@@ -15,6 +16,11 @@ export const plexCondensed = IBM_Plex_Sans_Condensed({
   variable: "--font-plex-condensed",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600"],
+});
+// Body text for the Cockpit Dark design system and site: full-width Plex reads better at length.
+export const plexSans = IBM_Plex_Sans({
+  variable: "--font-plex-sans",
+  subsets: ["latin"],
 });
 export const plexMono = IBM_Plex_Mono({
   variable: "--font-plex-mono",

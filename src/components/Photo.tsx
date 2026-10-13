@@ -8,12 +8,14 @@ export default function Photo({
   className = "",
   position,
   preload,
+  eager,
 }: {
   slug: PhotoSlug;
   sizes?: string;
   className?: string;
   position?: string;
   preload?: boolean;
+  eager?: boolean; // skip lazy loading, for images that must always show (cards, panels)
 }) {
   const p = photo(slug);
   return (
@@ -23,6 +25,7 @@ export default function Photo({
       fill
       sizes={sizes}
       preload={preload}
+      loading={eager ? "eager" : undefined}
       className={`object-cover ${className}`}
       style={position ? { objectPosition: position } : undefined}
     />

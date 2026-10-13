@@ -20,9 +20,63 @@
   --font-mono: var(--font-geist-mono);
   /* Per-board families; the CSS variables are set by next/font on each board. */
   --font-cockpit: var(--font-plex-mono);
+  --font-cond: var(--font-plex-condensed);
+  --font-plex: var(--font-plex-sans);
   --font-display: var(--font-instrument);
   --font-text: var(--font-newsreader);
   --font-label: var(--font-archivo);
+}
+
+/*
+  Control state variants for the design systems.
+  Each one fires on the real interaction, or can be forced with data-state="…"
+  so a state table can show every state side by side.
+  A control with any data-state ignores live hover and press.
+*/
+@custom-variant hov {
+  &:hover:not([data-state]):not(:disabled):not([aria-disabled="true"]) {
+    @slot;
+  }
+  &[data-state="hover"] {
+    @slot;
+  }
+}
+
+@custom-variant foc {
+  &:focus-visible {
+    @slot;
+  }
+  &[data-state="focus"] {
+    @slot;
+  }
+}
+
+@custom-variant prs {
+  &:active:not([data-state]):not(:disabled) {
+    @slot;
+  }
+  &[data-state="pressed"] {
+    @slot;
+  }
+}
+
+@custom-variant sel {
+  &[aria-pressed="true"],
+  &[aria-selected="true"],
+  &[aria-checked="true"],
+  &:checked {
+    @slot;
+  }
+  &[data-state="selected"] {
+    @slot;
+  }
+}
+
+@custom-variant dis {
+  &:disabled,
+  &[aria-disabled="true"] {
+    @slot;
+  }
 }
 
 body {
